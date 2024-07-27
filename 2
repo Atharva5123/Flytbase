@@ -1,0 +1,24 @@
+#include <cpp_api/navigation_bridge.h>
+#include <iostream>
+#include <cmath>                                                                            // For sqrt function
+
+Navigation nav;
+
+int main(int argc, char *argv[])
+{
+    // Take off to 10 meters
+    nav.take_off(10.0);
+    
+    // Calculate coordinates for a triangle with side length 10 meters
+    double side_length = 10.0;
+    double height = side_length * sqrt(3) / 2;                                           // Height of the equilateral triangle
+
+    // Move in a triangular trajectory of side length 10 meters at a height of 10 meters
+    // Start at origin (0, 0, 10)
+    nav.position_set(side_length, 0, 10);                                              // Move to (10, 0, 10)
+    nav.position_set(side_length / 2, height, 10);                                    // Move to (5, 8.66, 10)
+    nav.position_set(0, 0, 10);                                                      // Move back to origin (0, 0, 10)
+    
+    // Land the drone
+    nav.land(false);
+}
