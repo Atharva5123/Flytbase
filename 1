@@ -2,12 +2,19 @@
 #include <iostream>
 
 Navigation nav;
+
 int main(int argc, char *argv[])
 {
+    // Take off to 5 meters
     nav.take_off(5.0);
-    nav.position_set(6.5,0,-5);				
-    nav.position_set(6.5,5,-5);
-    nav.position_set(0,6.5,-5);
-    nav.position_set(0,0,-5);
-    nav.land(false);			
+    
+    // Move in a square trajectory of side length 6.5 meters at a height of 5 meters
+    // (Starting point)
+    nav.position_set(6.5, 0, 5);                                            // Move to (6.5, 0, 5)
+    nav.position_set(6.5, 6.5, 5);                                         // Move to (6.5, 6.5, 5)
+    nav.position_set(0, 6.5, 5);                                           // Move to (0, 6.5, 5)
+    nav.position_set(0, 0, 5);                                             // Move back to (0, 0, 5)
+    
+    // Land the drone
+    nav.land(false);
 }
